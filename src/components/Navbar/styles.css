@@ -1,0 +1,9 @@
+.navbar-title-link {
+    text-decoration: none;
+    color: rgb(33, 37, 41);
+}
+
+.navbar-title {
+    font-weight: bold;
+    font-size: 48px;
+}

@@ -1,0 +1,36 @@
+.footer {
+  --footer-background: #ffffff;
+  background-color: #ffffff;
+  height: auto;
+  width: 100%;
+  padding: 1rem 10rem;
+  border-top: 3px solid #e3e2de;
+}
+
+.footer .content {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: var(--footer-background);
+}
+
+.footer a {
+  color: #242424;
+  text-decoration: none;
+}
+
+.footer p {
+  text-align: center;
+  font-style: italic;
+  width: 100%;
+  color: #242424;
+  text-decoration: none;
+  flex-direction: column;
+  padding: 2rem 0 0.5rem 0;
+  transition: 0.5s ease-in-out;
+}
+
+.footer .content a:hover {
+  color: #797979;
+  font-size: 1.03rem;
+}
