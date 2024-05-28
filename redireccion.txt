@@ -1,0 +1,1 @@
+..\routes\sign-up\index.tsx
