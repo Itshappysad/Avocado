@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Camisa",
+    "price": 110999,
+    "imgUrl": "/imgs/LExTeFIPrhB3JmFZLeyY.png",
+    "colors": ["#ffc7c7", "#92c0ff", "#34ff67"],
+    "sizes": ["s", "m", "l", "xl"]
+  },
+  {
+    "id": 2,
+    "name": "Sudadera",
+    "price": 150000,
+    "imgUrl": "/imgs/Tg3b3pANUgyYe4cf98Ss.png",
+    "colors": ["#ccab46", "#3499f4", "#9903d2"],
+    "sizes": ["m", "l", "xl"]
+  }
+]

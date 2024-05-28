@@ -1,0 +1,22 @@
+.company-layout {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto repeat(4, 1fr);
+  grid-template-areas:
+    "header header header"
+    "side main main"
+    "side main main"
+    "side main main";
+}
+
+.header {
+  grid-area: header;
+}
+
+.side {
+  grid-area: side;
+}
+
+.main {
+  grid-area: main;
+}
