@@ -1,10 +1,7 @@
-import { Timestamp } from "firebase/firestore";
-
-export type ResgisterUser = {
+export type User = {
+  id: string;
   name: string;
   email: string;
-  password?: string | null;
-  id: string;
   provider?: string | null;
   address?: string | null;
   postalcode?: number | null;
@@ -21,15 +18,9 @@ export type Product = {
   companyId: string;
 };
 
-export type Subscription = {
-  id: number;
-  name: string;
-  price: number;
-  imgUrl: string;
-};
-
 export type Company = {
   id: string;
+  userId: string;
   name: string;
   email: string;
   address: string;
@@ -40,41 +31,38 @@ export type Company = {
   phone: string;
 };
 
-export type Item = {
+/** Producto dentro del carrito de un usuario (users/{uid}/cart). */
+export type CartItem = {
   id: string;
-  colors: string[];
+  productId: string;
   price: number;
-  sizes: string[];
   quantity: number;
-  productId: string;
-};
-
-export type ItemData = {
-  itemId: string;
-  productId: string;
-  name: string;
-  price: number;
   colors: string[];
   sizes: string[];
-  categories: string[];
-  materials: string;
-  companyId: string;
 };
 
+export type NewCartItem = Omit<CartItem, "id" | "quantity">;
+
+export type OrderState = "pendiente" | "enviado" | "recibido";
+
+/** Compra vista desde el usuario (users/{uid}/purchases). */
 export type UserPurchase = {
   id: string;
-  company: string;
-  items: Item[];
+  companyId: string;
+  orderId?: string;
+  items: CartItem[];
   address: string;
-  state: "pendiente" | "enviado" | "recibido";
-  orderedAt: Timestamp;
+  state: OrderState;
+  orderedAt: Date;
 };
 
+/** Pedido visto desde la empresa (companies/{id}/orders). */
 export type CompanyOrder = {
   id: string;
   userId: string;
-  items: Item[];
+  purchaseId?: string;
+  items: CartItem[];
   address: string;
-  state: "pendiente" | "enviado" | "recibido";
-  orderedAt: Timestamp;
+  state: OrderState;
+  orderedAt: Date;
 };

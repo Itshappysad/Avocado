@@ -1,21 +1,13 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../firebase.config";
+import { loadBackend } from "./backend";
 
-export async function getProductImage(id: string) {
-  try {
-    const image = await getDownloadURL(ref(storage, `product_images/${id}`));
-    return image;
-  } catch (e) {
-    return null;
-  }
+export { imagePaths } from "./constants";
+
+/** Devuelve la URL de una imagen, o null si no existe. */
+export async function getImageUrl(path: string) {
+  return (await loadBackend()).getImageUrl(path);
 }
 
-export async function uploadProductImage(id: string, file: File) {
-  try {
-    const storageRef = ref(storage, `product_images/${id}`);
-    await uploadBytes(storageRef, file);
-    return true;
-  } catch (e) {
-    return false;
-  }
+/** Sube una imagen y devuelve su URL. */
+export async function uploadImage(path: string, file: File) {
+  return (await loadBackend()).uploadImage(path, file);
 }

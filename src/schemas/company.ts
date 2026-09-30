@@ -1,38 +1,27 @@
 import { z } from "zod";
 
-export const registerCompanyFormSchema = z.object({
-  name: z.string().min(2),
-  address: z.string().min(1),
-  bankType: z.string().min(1),
-  bankAccount: z.string().min(10),
+export const companyFormSchema = z.object({
+  name: z.string().trim().min(2, "Mínimo 2 caracteres"),
   nit: z
     .string()
-    .regex(new RegExp(`^\\d{4,}(\\.\\d+)?-\\d$`), "Ingresa un NIT valido"),
-  email: z
-    .string({ required_error: "Campo requerido" })
-    .email("Ingresa un correo valido")
-    .min(1),
-  phone: z.string().min(10),
-  postalcode: z.number().int().positive().min(9999),
-});
-
-export const editCompanyFormSchema = z.object({
-  name: z.string().min(2).optional(),
-  address: z.string().min(1).optional(),
-  bankType: z.string().min(1).optional(),
-  bankAccount: z.string().min(10).optional(),
-  nit: z
+    .trim()
+    .regex(/^\d{4,}(\.\d+)?-\d$/, "Ingresa un NIT válido (ej: 900123456-7)"),
+  bankType: z.string().min(1, "Selecciona un banco"),
+  bankAccount: z
     .string()
-    .regex(new RegExp(`^\\d{4,}(\\.\\d+)?-\\d$`), "Ingresa un NIT valido")
-    .optional(),
-  email: z
-    .string({ required_error: "Campo requerido" })
-    .email("Ingresa un correo valido")
-    .min(1)
-    .optional(),
-  phone: z.string().min(10).optional(),
-  postalcode: z.number().int().positive().min(9999).optional(),
+    .trim()
+    .regex(/^\d{10,20}$/, "Debe tener entre 10 y 20 dígitos"),
+  address: z.string().trim().min(1, "Campo requerido"),
+  postalcode: z.coerce
+    .number({ invalid_type_error: "Ingresa un número" })
+    .int()
+    .min(10000, "Código postal inválido")
+    .max(999999, "Código postal inválido"),
+  email: z.string().trim().email("Ingresa un correo válido"),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^\+?\d{10,13}$/, "Ingresa un teléfono válido"),
 });
 
-export type RegisterCompanyForm = z.infer<typeof registerCompanyFormSchema>;
-export type EditCompanyForm = z.infer<typeof editCompanyFormSchema>;
+export type CompanyFormValues = z.infer<typeof companyFormSchema>;

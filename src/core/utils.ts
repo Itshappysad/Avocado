@@ -1,44 +1,32 @@
-import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
+/** Combina clases de Tailwind resolviendo conflictos. */
 export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes));
 }
 
-export function hexToRgb(hex: string) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+const currencyFormatter = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+  maximumFractionDigits: 0,
+});
 
-  return result
-    ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
-        result[3],
-        16,
-      )}`
-    : "0, 0, 0";
+export function formatCurrency(value: number) {
+  return currencyFormatter.format(value);
 }
 
-export function getLuminance(r: number, g: number, b: number) {
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+/** Indica si un color hex (#rrggbb) es claro, para elegir texto negro o blanco encima. */
+export function isLightColor(hex: string) {
+  const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!match) return true;
+  const [r, g, b] = match.slice(1).map((h) => parseInt(h, 16));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 128;
 }
 
-function componentToHex(c: number) {
-  const hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-}
-
-export function rgbToHex(r: number, g: number, b: number) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-export function getDifferences<T extends Object>(objs: T[], target: keyof T) {
-  const diff = objs.reduce((acc, current) => {
-    const found = acc.find((ob) => ob === current[target]);
-
-    if (found) return acc;
-
-    console.log(current[target]);
-
-    return [...acc, current[target]];
-  }, [] as T[typeof target][]);
-
-  return diff;
+/** Agrega o quita un valor de una lista (útil para selecciones múltiples). */
+export function toggleValue<T>(list: T[], value: T) {
+  return list.includes(value)
+    ? list.filter((v) => v !== value)
+    : [...list, value];
 }
