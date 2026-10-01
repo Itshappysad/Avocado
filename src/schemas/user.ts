@@ -1,5 +1,9 @@
+/**
+ * Validación (Zod) del formulario "Mi perfil".
+ */
 import { z } from "zod";
 
+/** Datos editables del perfil (el correo no se puede cambiar). */
 export const editUserSchema = z.object({
   name: z.string().trim().min(1, "Campo requerido"),
   address: z.string().trim().optional(),
@@ -15,4 +19,5 @@ export const editUserSchema = z.object({
   ),
 });
 
+/** Valores del formulario de perfil (ya validados). */
 export type EditUserValues = z.infer<typeof editUserSchema>;

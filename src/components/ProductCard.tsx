@@ -1,9 +1,13 @@
+/**
+ * Tarjeta de producto para las grillas y carruseles.
+ */
 import { forwardRef } from "react";
 import { formatCurrency } from "../core/utils";
 import type { Product } from "../core/types";
 import { ProductImage } from "./ProductImage";
 
 type ProductCardProps = React.ComponentPropsWithoutRef<"button"> & {
+  /** Producto a mostrar (imagen, nombre y precio). */
   product: Product;
 };
 

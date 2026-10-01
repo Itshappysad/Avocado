@@ -1,3 +1,6 @@
+/**
+ * Datos de la empresa (ruta "/company/edit").
+ */
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { updateCompany } from "../../core/database";
@@ -5,6 +8,7 @@ import { useMyCompany } from "../../hooks/useMyCompany";
 import { CompanyForm } from "../../components/CompanyForm";
 import { PageHeader } from "../../components/ui/page-header";
 
+/** Formulario con los datos de la empresa precargados para editarlos. */
 export default function EditCompanyPage() {
   const { data: company } = useMyCompany();
   const queryClient = useQueryClient();

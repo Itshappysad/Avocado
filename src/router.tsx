@@ -1,3 +1,10 @@
+/**
+ * Definición de todas las rutas de la aplicación (React Router).
+ *
+ * Todas las páginas se muestran dentro del layout <App> (navbar + footer).
+ * Las rutas que requieren sesión están envueltas en <RequireAuth>, que manda
+ * al usuario a /signup si no ha iniciado sesión.
+ */
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { RequireAuth } from "./components/layout/RequireAuth";
@@ -17,6 +24,10 @@ import CompanyOrdersPage from "./pages/business/CompanyOrdersPage";
 import CompanyProductsPage from "./pages/business/CompanyProductsPage";
 import EditCompanyPage from "./pages/business/EditCompanyPage";
 
+/**
+ * Rutas de la aplicación. Para agregar una página nueva: crea el componente en
+ * src/pages/ y añade aquí un objeto { path, element }.
+ */
 export const router = createBrowserRouter([
   {
     path: "/",

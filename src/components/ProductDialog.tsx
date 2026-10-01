@@ -1,3 +1,6 @@
+/**
+ * Diálogo de detalle de un producto: elegir talla y color y agregar al carrito.
+ */
 import { useState } from "react";
 import { ShoppingBag } from "lucide-react";
 import { toast } from "sonner";

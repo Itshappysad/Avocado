@@ -1,8 +1,13 @@
+/**
+ * Layout con menú lateral para los paneles "Mi cuenta" y "Mi empresa".
+ */
 import { NavLink, Outlet } from "react-router-dom";
 import { cn } from "../../core/utils";
 
 type DashboardLayoutProps = {
+  /** Título del panel (arriba del menú). */
   title: string;
+  /** Opciones del menú lateral. La activa se resalta en negro. */
   links: { to: string; label: string; icon?: React.ReactNode }[];
 };
 

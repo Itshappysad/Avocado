@@ -1,8 +1,12 @@
+/**
+ * Pie de página.
+ */
 import { Link } from "react-router-dom";
 import { dataSource } from "../../core/backend";
 
 const INSTAGRAM_URL = "https://www.instagram.com/avocadoevestiti/";
 
+/** Pie de página con enlaces de contacto e información. */
 export function Footer() {
   return (
     <footer className="mt-20 border-t bg-neutral-50">

@@ -1,3 +1,6 @@
+/**
+ * Mi perfil (ruta "/account/edit"): datos personales y foto.
+ */
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -10,6 +13,10 @@ import { Field } from "../../components/ui/field";
 import { Input } from "../../components/ui/input";
 import { PageHeader } from "../../components/ui/page-header";
 
+/**
+ * Edición del perfil. El botón "Guardar" solo se activa si algo cambió.
+ * El correo se muestra pero no se puede editar (es el usuario de inicio de sesión).
+ */
 export default function EditProfilePage() {
   const { user } = useAuth();
 

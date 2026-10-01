@@ -1,3 +1,9 @@
+/**
+ * Backend local: implementa la interfaz Backend usando el navegador.
+ *
+ * Toda la lectura/escritura pasa por store.ts (localStorage). Las
+ * suscripciones "en tiempo real" se simulan escuchando los cambios del store.
+ */
 import type {
   CartItem,
   CompanyOrder,
@@ -24,19 +30,23 @@ import {
 /** Pequeña espera para que la app se comporte como con una base de datos real. */
 const delay = (ms = 120) => new Promise((r) => setTimeout(r, ms));
 
+/** Quita el hash de la contraseña antes de entregar el usuario a la app. */
 const toUser = ({ passwordHash: _hash, ...user }: StoredUser): User => user;
 
+/** Datos de sesión a partir del usuario guardado. */
 const toAuthUser = (user: StoredUser): AuthUser => ({
   id: user.id,
   name: user.name,
   email: user.email,
 });
 
+/** Convierte la fecha guardada como texto en un Date. */
 const withDate = <T extends { orderedAt: string }>(item: T) => ({
   ...item,
   orderedAt: new Date(item.orderedAt),
 });
 
+/** Para ordenar pedidos del más reciente al más antiguo. */
 const byNewest = (a: { orderedAt: Date }, b: { orderedAt: Date }) =>
   b.orderedAt.getTime() - a.orderedAt.getTime();
 
@@ -68,6 +78,7 @@ async function fileToDataUrl(file: File, maxSize = 800) {
   return canvas.toDataURL("image/jpeg", 0.82);
 }
 
+/** Busca un usuario por correo sin importar mayúsculas/minúsculas. */
 function findUserByEmail(email: string) {
   const normalized = email.trim().toLowerCase();
   return Object.values(read().users).find(
@@ -75,6 +86,10 @@ function findUserByEmail(email: string) {
   );
 }
 
+/**
+ * Crea el backend local. No necesita configuración: la primera vez que se
+ * usa, store.ts carga los datos de ejemplo de seed.ts.
+ */
 export function createLocalBackend(): Backend {
   const getProductById = async (id: string) => read().products[id] ?? null;
   const allProducts = () => Object.values(read().products);

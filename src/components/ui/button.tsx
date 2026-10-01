@@ -1,8 +1,16 @@
+/**
+ * Botón base (shadcn/ui).
+ *
+ * Variantes: default (negro), destructive (rojo), outline, secondary, ghost y
+ * link. Tamaños: default, sm, lg e icon. Con `asChild` el estilo se aplica al
+ * hijo (útil para envolver un <Link>).
+ */
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../core/utils";
 
+/** Clases de Tailwind de cada variante y tamaño (class-variance-authority). */
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300",
   {
@@ -34,10 +42,12 @@ const buttonVariants = cva(
   },
 );
 
+/** Props del botón: las de <button> más `variant`, `size` y `asChild`. */
 export interface ButtonProps
   extends
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  /** Aplica el estilo al único hijo en vez de crear un <button> (ej: un <Link>). */
   asChild?: boolean;
 }
 

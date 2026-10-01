@@ -1,3 +1,6 @@
+/**
+ * Panel lateral del carrito de compras.
+ */
 import { Link } from "react-router-dom";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCart } from "../context/CartContext";
@@ -13,6 +16,11 @@ import {
   SheetTitle,
 } from "./ui/sheet";
 
+/**
+ * Panel lateral del carrito. Se abre desde el botón del carrito del navbar
+ * (su estado abierto/cerrado vive en CartContext) y permite cambiar
+ * cantidades, eliminar líneas e ir a pagar.
+ */
 export function CartSheet() {
   const { items, subtotal, isOpen, setOpen, increase, decrease, remove } =
     useCart();

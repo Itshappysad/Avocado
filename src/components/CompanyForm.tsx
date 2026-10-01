@@ -1,3 +1,6 @@
+/**
+ * Formulario con los datos de una empresa.
+ */
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BANK_OPTIONS } from "../core/constants";
@@ -8,12 +11,18 @@ import { Input } from "./ui/input";
 import { NativeSelect } from "./ui/native-select";
 
 type CompanyFormProps = {
+  /** Valores iniciales (al editar, los datos actuales de la empresa). */
   defaultValues?: Partial<CompanyFormValues>;
+  /** Texto del botón, ej: "Crear empresa" o "Guardar cambios". */
   submitLabel: string;
+  /** Recibe los datos ya validados. El botón se desactiva mientras se ejecuta. */
   onSubmit: (values: CompanyFormValues) => Promise<void>;
 };
 
-/** Formulario de datos de la empresa (se usa para crearla y para editarla). */
+/**
+ * Formulario de datos de la empresa, validado con `companyFormSchema`.
+ * Lo usan CreateCompanyPage (crear) y EditCompanyPage (editar).
+ */
 export function CompanyForm({
   defaultValues,
   submitLabel,

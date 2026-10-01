@@ -1,3 +1,6 @@
+/**
+ * Finalizar compra (ruta "/checkout", requiere sesión).
+ */
 import { Link, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { ShoppingBag } from "lucide-react";
@@ -23,6 +26,11 @@ function formatAddress(v: PaymentValues) {
     .join(" · ");
 }
 
+/**
+ * Checkout: formulario de entrega a la izquierda y resumen a la derecha.
+ * Al confirmar llama a `purchase()`, que crea los pedidos y vacía el carrito,
+ * y luego lleva al historial de compras.
+ */
 export default function CheckoutPage() {
   const { user } = useAuth();
   const { items, subtotal } = useCart();

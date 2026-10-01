@@ -1,5 +1,12 @@
+/**
+ * Validación (Zod) del formulario de empresa (crear y editar).
+ */
 import { z } from "zod";
 
+/**
+ * Datos de una empresa. Los campos de texto se recortan (trim) antes de
+ * validar y el código postal se convierte a número.
+ */
 export const companyFormSchema = z.object({
   name: z.string().trim().min(2, "Mínimo 2 caracteres"),
   nit: z
@@ -24,4 +31,5 @@ export const companyFormSchema = z.object({
     .regex(/^\+?\d{10,13}$/, "Ingresa un teléfono válido"),
 });
 
+/** Valores del formulario de empresa (ya validados). */
 export type CompanyFormValues = z.infer<typeof companyFormSchema>;

@@ -1,3 +1,17 @@
+/**
+ * Backend de Firebase: Auth (usuarios), Firestore (datos) y Storage (imágenes).
+ *
+ * Solo se descarga cuando VITE_DATA_SOURCE=firebase (se carga con import()
+ * dinámico desde backend/index.ts).
+ *
+ * Estructura en Firestore:
+ *   users/{uid}                  perfil del usuario
+ *     cart/{itemId}              carrito
+ *     purchases/{purchaseId}     historial de compras
+ *   companies/{companyId}        empresa (userId = dueño)
+ *     orders/{orderId}           pedidos recibidos
+ *   products/{productId}         productos (companyId = empresa)
+ */
 import { FirebaseError, initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import {
@@ -43,6 +57,7 @@ import type {
 import { imagePaths } from "../../constants";
 import { AuthError, type Backend } from "../types";
 
+/** Mensajes en español para los códigos de error de Firebase Auth. */
 const AUTH_ERRORS: Record<string, string> = {
   "auth/email-already-in-use": "Ya existe una cuenta con ese correo",
   "auth/invalid-credential": "Correo o contraseña incorrectos",
@@ -74,6 +89,11 @@ function toDate(value: unknown) {
   return value instanceof Timestamp ? value.toDate() : new Date(String(value));
 }
 
+/**
+ * Inicializa Firebase con la configuración del .env y devuelve el backend.
+ *
+ * @throws Error si faltan las variables VITE_FIREBASE_* en el .env.
+ */
 export function createFirebaseBackend(): Backend {
   const config = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

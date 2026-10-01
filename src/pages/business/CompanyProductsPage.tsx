@@ -1,3 +1,6 @@
+/**
+ * Mis productos (ruta "/company/products"): lista y edición de productos.
+ */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -18,6 +21,10 @@ import { EmptyState } from "../../components/ui/empty-state";
 import { PageHeader } from "../../components/ui/page-header";
 import { PageLoader } from "../../components/ui/spinner";
 
+/**
+ * Productos de la empresa. Al hacer clic en uno se abre un diálogo con el
+ * formulario de edición.
+ */
 export default function CompanyProductsPage() {
   const { data: company } = useMyCompany();
   const [editing, setEditing] = useState<Product | null>(null);

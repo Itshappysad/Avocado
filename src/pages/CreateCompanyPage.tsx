@@ -1,3 +1,6 @@
+/**
+ * Crear empresa (ruta "/create-company", requiere sesión).
+ */
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,6 +12,10 @@ import { CompanyForm } from "../components/CompanyForm";
 import { PageHeader } from "../components/ui/page-header";
 import { PageLoader } from "../components/ui/spinner";
 
+/**
+ * Registro de la empresa del usuario. Si ya tiene una, lo manda a su panel.
+ * Al crearla lo lleva directo a "Añadir producto".
+ */
 export default function CreateCompanyPage() {
   const { user } = useAuth();
   const { data: company, isLoading } = useMyCompany();

@@ -1,3 +1,6 @@
+/**
+ * Barra de navegación superior (logo, enlaces, carrito y cuenta).
+ */
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
@@ -7,12 +10,14 @@ import { AccountSheet } from "../AccountSheet";
 import { Button } from "../ui/button";
 import { cn } from "../../core/utils";
 
+/** Enlaces principales del menú. `end` hace que "/" solo se active en el inicio. */
 const links = [
   { to: "/", label: "Inicio", end: true },
   { to: "/store", label: "Productos" },
   { to: "/about", label: "Nosotros" },
 ];
 
+/** Enlace del menú; se subraya en verde cuando es la página actual. */
 function NavItem({
   to,
   label,
@@ -37,6 +42,11 @@ function NavItem({
   );
 }
 
+/**
+ * Barra superior fija. En celulares los enlaces se esconden en un menú
+ * desplegable. El ícono de usuario abre el panel "Mi cuenta" o, si no hay
+ * sesión, se muestra el botón "Ingresar".
+ */
 export function Navbar() {
   const { totalQuantity, setOpen: setCartOpen } = useCart();
   const { user } = useAuth();

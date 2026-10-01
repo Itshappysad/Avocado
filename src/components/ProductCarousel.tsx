@@ -1,3 +1,6 @@
+/**
+ * Carrusel de productos filtrados (secciones de la página de inicio).
+ */
 import { useQuery } from "@tanstack/react-query";
 import { getProductsByCategory, getProductsByMaterial } from "../core/database";
 import { ProductCard } from "./ProductCard";
@@ -12,6 +15,7 @@ import {
 import { PageLoader } from "./ui/spinner";
 
 type ProductCarouselProps = {
+  /** Título de la sección, ej: "Camisas". */
   title: string;
 } & (
   | { category: string; material?: never }

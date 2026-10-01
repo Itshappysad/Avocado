@@ -1,9 +1,14 @@
+/**
+ * Mensaje para secciones sin datos (o con error).
+ */
 import { cn } from "../../core/utils";
 
 type EmptyStateProps = {
   title: string;
   description?: string;
+  /** Ícono grande arriba del título. */
   icon?: React.ReactNode;
+  /** Botón o enlace opcional, ej: "Ir a la tienda". */
   action?: React.ReactNode;
   className?: string;
 };

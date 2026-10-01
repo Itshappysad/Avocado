@@ -1,3 +1,6 @@
+/**
+ * Formulario de inicio de sesión con correo y contraseña.
+ */
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -7,6 +10,12 @@ import { Button } from "../ui/button";
 import { Field } from "../ui/field";
 import { Input } from "../ui/input";
 
+/**
+ * Formulario de inicio de sesión. Valida con `signInSchema` y muestra un
+ * aviso con el error si las credenciales no son correctas.
+ *
+ * @param onSuccess Se llama al iniciar sesión (normalmente para redirigir).
+ */
 export function SignInForm({ onSuccess }: { onSuccess: () => void }) {
   const {
     register,

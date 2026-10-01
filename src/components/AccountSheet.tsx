@@ -1,3 +1,6 @@
+/**
+ * Panel lateral "Mi cuenta" que se abre desde el ícono de usuario del navbar.
+ */
 import { Link, useNavigate } from "react-router-dom";
 import { Building2, LogOut, UserRound } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
@@ -12,7 +15,9 @@ import {
 } from "./ui/sheet";
 
 type AccountSheetProps = {
+  /** Si el panel está abierto. */
   open: boolean;
+  /** Se llama al abrir o cerrar (clic afuera, Escape o la X). */
   onOpenChange: (open: boolean) => void;
 };
 

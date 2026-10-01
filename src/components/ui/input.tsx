@@ -1,8 +1,12 @@
+/**
+ * Campo de texto base de la app.
+ */
 import { forwardRef, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { cn } from "../../core/utils";
 
 type InputProps = React.ComponentPropsWithoutRef<"input"> & {
+  /** Resalta el borde en rojo y marca aria-invalid. */
   invalid?: boolean;
 };
 

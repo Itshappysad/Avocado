@@ -15,8 +15,11 @@ import type {
 } from "../../types";
 import { createSeed } from "./seed";
 
+/** Clave de localStorage con todos los datos (JSON). Cambiar "v1" invalida datos viejos. */
 const DB_KEY = "avocado:db:v1";
+/** Clave con el id del usuario que inició sesión. */
 const SESSION_KEY = "avocado:session";
+/** Prefijo de las claves de las imágenes subidas (una clave por imagen, en base64). */
 const IMAGE_PREFIX = "avocado:img:";
 
 /** Las fechas se guardan como texto ISO porque localStorage solo guarda texto. */
@@ -24,16 +27,26 @@ type Stored<T extends { orderedAt: Date }> = Omit<T, "orderedAt"> & {
   orderedAt: string;
 };
 
+/** Usuario tal como se guarda: incluye el hash de la contraseña. */
 export type StoredUser = User & { passwordHash: string };
+/** Compra tal como se guarda (fecha en texto). */
 export type StoredPurchase = Stored<UserPurchase>;
+/** Pedido tal como se guarda (fecha en texto). */
 export type StoredOrder = Stored<CompanyOrder>;
 
+/**
+ * Forma completa de la "base de datos" local. Las colecciones son objetos
+ * { id: registro } para buscar por id rápidamente.
+ */
 export type LocalDb = {
   users: Record<string, StoredUser>;
   companies: Record<string, Company>;
   products: Record<string, Product>;
+  /** Carrito de cada usuario: carts[userId][cartItemId]. */
   carts: Record<string, Record<string, CartItem>>;
+  /** Historial de cada cliente: purchases[userId][purchaseId]. */
   purchases: Record<string, Record<string, StoredPurchase>>;
+  /** Pedidos de cada empresa: orders[companyId][orderId]. */
   orders: Record<string, Record<string, StoredOrder>>;
 };
 
@@ -42,6 +55,7 @@ export type LocalDb = {
 let cache: LocalDb | null = null;
 const listeners = new Set<() => void>();
 
+/** Lee los datos de localStorage, o crea los de ejemplo si no hay. */
 function load(): LocalDb {
   try {
     const raw = localStorage.getItem(DB_KEY);
@@ -54,6 +68,7 @@ function load(): LocalDb {
   return seed;
 }
 
+/** Guarda los datos en localStorage. */
 function persist(db: LocalDb) {
   try {
     localStorage.setItem(DB_KEY, JSON.stringify(db));
@@ -62,6 +77,7 @@ function persist(db: LocalDb) {
   }
 }
 
+/** Avisa a todos los suscriptores que algo cambió. */
 function notify() {
   listeners.forEach((listener) => listener());
 }
@@ -99,6 +115,7 @@ if (typeof window !== "undefined") {
 
 /* ---------------------------------- Sesión ---------------------------------- */
 
+/** Id del usuario con sesión iniciada, o null. */
 export function getSessionUserId() {
   try {
     return localStorage.getItem(SESSION_KEY);
@@ -107,6 +124,7 @@ export function getSessionUserId() {
   }
 }
 
+/** Inicia (con un id) o cierra (con null) la sesión. */
 export function setSessionUserId(userId: string | null) {
   try {
     if (userId) localStorage.setItem(SESSION_KEY, userId);
@@ -119,6 +137,7 @@ export function setSessionUserId(userId: string | null) {
 
 /* --------------------------------- Imágenes --------------------------------- */
 
+/** Imagen subida por el usuario (data URL), o null si no hay. */
 export function getStoredImage(path: string) {
   try {
     return localStorage.getItem(IMAGE_PREFIX + path);
@@ -127,6 +146,10 @@ export function getStoredImage(path: string) {
   }
 }
 
+/**
+ * Guarda una imagen (data URL).
+ * @throws Error si el navegador se quedó sin espacio (~5 MB en total).
+ */
 export function storeImage(path: string, dataUrl: string) {
   try {
     localStorage.setItem(IMAGE_PREFIX + path, dataUrl);
@@ -140,6 +163,7 @@ export function storeImage(path: string, dataUrl: string) {
 
 /* ---------------------------------- Utilidades ---------------------------------- */
 
+/** Genera un id único y legible, ej: "p-lz3k9abc12". */
 export function newId(prefix: string) {
   return `${prefix}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 }

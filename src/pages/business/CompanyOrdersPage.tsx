@@ -1,3 +1,6 @@
+/**
+ * Pedidos (ruta "/company/orders"): pedidos recibidos y cambio de estado.
+ */
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ClipboardList } from "lucide-react";
 import { toast } from "sonner";
@@ -11,6 +14,10 @@ import { NativeSelect } from "../../components/ui/native-select";
 import { PageHeader } from "../../components/ui/page-header";
 import { PageLoader } from "../../components/ui/spinner";
 
+/**
+ * Pedidos recibidos por la empresa. Cambiar el selector de estado actualiza
+ * el pedido y la compra del cliente al mismo tiempo.
+ */
 export default function CompanyOrdersPage() {
   const { data: company } = useMyCompany();
   const queryClient = useQueryClient();

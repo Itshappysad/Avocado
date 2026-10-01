@@ -1,14 +1,19 @@
+/**
+ * Tarjeta de un pedido y etiqueta de estado.
+ */
 import { ORDER_STATES } from "../core/constants";
 import { cn, formatCurrency } from "../core/utils";
 import type { CartItem, OrderState } from "../core/types";
 import { CartLine } from "./CartLine";
 
+/** Color de la etiqueta según el estado del pedido. */
 const stateStyles: Record<OrderState, string> = {
   pendiente: "bg-amber-100 text-amber-800",
   enviado: "bg-sky-100 text-sky-800",
   recibido: "bg-brand-100 text-brand-800",
 };
 
+/** Etiqueta de color con el estado del pedido (Pendiente, Enviado, Recibido). */
 export function OrderStateBadge({ state }: { state: OrderState }) {
   const label = ORDER_STATES.find((s) => s.value === state)?.label ?? state;
   return (
@@ -24,8 +29,10 @@ export function OrderStateBadge({ state }: { state: OrderState }) {
 }
 
 type OrderCardProps = {
+  /** Fecha del pedido. */
   orderedAt: Date;
   items: CartItem[];
+  /** Dirección de entrega. */
   address: string;
   /** Normalmente el estado del pedido (un badge o un selector). */
   status: React.ReactNode;

@@ -1,6 +1,10 @@
+/**
+ * Indicadores de carga.
+ */
 import { Loader2 } from "lucide-react";
 import { cn } from "../../core/utils";
 
+/** Ícono de carga girando. */
 export function Spinner({ className }: { className?: string }) {
   return (
     <Loader2

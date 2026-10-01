@@ -1,6 +1,10 @@
+/**
+ * Encabezado de página (título, descripción y acciones).
+ */
 type PageHeaderProps = {
   title: string;
   description?: string;
+  /** Acciones a la derecha del título (ej: un botón "Añadir"). */
   children?: React.ReactNode;
 };
 

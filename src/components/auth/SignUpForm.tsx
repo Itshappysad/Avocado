@@ -1,3 +1,6 @@
+/**
+ * Formulario de registro de una cuenta nueva.
+ */
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -7,6 +10,12 @@ import { Button } from "../ui/button";
 import { Field } from "../ui/field";
 import { Input } from "../ui/input";
 
+/**
+ * Formulario de registro. Valida con `signUpSchema` (contraseña de al menos
+ * 10 caracteres y confirmación igual), crea la cuenta e inicia sesión.
+ *
+ * @param onSuccess Se llama al crear la cuenta (normalmente para redirigir).
+ */
 export function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
   const {
     register,

@@ -1,3 +1,10 @@
+/**
+ * Configuración de ESLint (npm run lint).
+ *
+ * - Reglas recomendadas de JavaScript y TypeScript.
+ * - react-hooks: detecta usos incorrectos de hooks (dependencias, etc.).
+ * - react-refresh: avisa si un archivo rompe la recarga en caliente de Vite.
+ */
 import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";

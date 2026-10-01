@@ -1,13 +1,20 @@
+/**
+ * Panel que se desliza desde la derecha (carrito y cuenta).
+ */
 import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { cn } from "../../core/utils";
 
 /** Panel lateral (carrito y cuenta), basado en el diálogo de Radix. */
+/** Contenedor; controla si está abierto (`open` / `onOpenChange`). */
 const Sheet = SheetPrimitive.Root;
+/** Elemento que abre el panel. */
 const SheetTrigger = SheetPrimitive.Trigger;
+/** Elemento que cierra el panel. */
 const SheetClose = SheetPrimitive.Close;
 
+/** Panel blanco que entra desde la derecha, con fondo oscuro y botón X. */
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>
@@ -32,6 +39,7 @@ const SheetContent = React.forwardRef<
 ));
 SheetContent.displayName = SheetPrimitive.Content.displayName;
 
+/** Cabecera con borde inferior. */
 const SheetHeader = ({
   className,
   ...props
@@ -39,6 +47,7 @@ const SheetHeader = ({
   <div className={cn("border-b px-6 py-4 pr-12", className)} {...props} />
 );
 
+/** Título del panel (obligatorio por accesibilidad). */
 const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
@@ -51,6 +60,7 @@ const SheetTitle = React.forwardRef<
 ));
 SheetTitle.displayName = SheetPrimitive.Title.displayName;
 
+/** Descripción para lectores de pantalla. */
 const SheetDescription = SheetPrimitive.Description;
 
 export {

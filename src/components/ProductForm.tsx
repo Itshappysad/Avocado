@@ -1,3 +1,6 @@
+/**
+ * Formulario para publicar o editar un producto de la empresa.
+ */
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,16 +25,32 @@ import { Input } from "./ui/input";
 import { NativeSelect } from "./ui/native-select";
 
 type ProductFormProps = {
+  /** Empresa a la que pertenece el producto. */
   companyId: string;
   /** Si se pasa un producto, el formulario funciona en modo edición. */
   product?: Product;
+  /** Se llama después de guardar correctamente. */
   onSaved?: () => void;
 };
 
+/** Convierte ["S", "M"] en opciones { label, value } para el Combobox. */
 const toOptions = (values: string[]) =>
   values.map((v) => ({ label: v, value: v }));
 
-/** Formulario para crear o editar un producto de la empresa. */
+/**
+ * Formulario para crear o editar un producto de la empresa.
+ *
+ * - Valida con `productFormSchema` y muestra los errores debajo de cada campo.
+ * - Tallas, categorías y colores son controles propios conectados con
+ *   <Controller> de react-hook-form.
+ * - La imagen es obligatoria al crear y opcional al editar.
+ * - Al guardar invalida la caché de ["products"] para que las listas se
+ *   actualicen solas.
+ *
+ * @example
+ * <ProductForm companyId={company.id} />                  // crear
+ * <ProductForm companyId={company.id} product={product} /> // editar
+ */
 export function ProductForm({ companyId, product, onSaved }: ProductFormProps) {
   const isEditing = !!product;
   const queryClient = useQueryClient();

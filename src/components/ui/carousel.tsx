@@ -1,3 +1,9 @@
+/**
+ * Carrusel deslizable (shadcn/ui, basado en Embla Carousel).
+ *
+ * Uso: <Carousel><CarouselContent><CarouselItem>…</CarouselItem></CarouselContent>
+ * <CarouselPrevious /><CarouselNext /></Carousel>
+ */
 import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -12,6 +18,7 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
+/** Props propias del carrusel (además de las de un <div>). */
 type CarouselProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
@@ -28,8 +35,10 @@ type CarouselContextProps = {
   canScrollNext: boolean;
 } & CarouselProps;
 
+/** Comparte la API de Embla entre el carrusel y sus botones. */
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
+/** Acceso al carrusel desde sus hijos (solo dentro de <Carousel>). */
 function useCarousel() {
   const context = React.useContext(CarouselContext);
 
@@ -40,6 +49,10 @@ function useCarousel() {
   return context;
 }
 
+/**
+ * Contenedor del carrusel. `opts` recibe las opciones de Embla, por ejemplo
+ * { loop: true, align: "start" }. Se puede mover con las flechas del teclado.
+ */
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
@@ -151,6 +164,7 @@ const Carousel = React.forwardRef<
 );
 Carousel.displayName = "Carousel";
 
+/** Pista que se desliza y contiene los CarouselItem. */
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -173,6 +187,7 @@ const CarouselContent = React.forwardRef<
 });
 CarouselContent.displayName = "CarouselContent";
 
+/** Cada elemento; su ancho se controla con clases basis-* (ej: "basis-1/3"). */
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -195,6 +210,7 @@ const CarouselItem = React.forwardRef<
 });
 CarouselItem.displayName = "CarouselItem";
 
+/** Botón para ir al elemento anterior. */
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
@@ -224,6 +240,7 @@ const CarouselPrevious = React.forwardRef<
 });
 CarouselPrevious.displayName = "CarouselPrevious";
 
+/** Botón para ir al elemento siguiente. */
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>

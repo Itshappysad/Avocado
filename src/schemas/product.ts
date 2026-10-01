@@ -1,5 +1,12 @@
+/**
+ * Validación (Zod) del formulario de producto (crear y editar).
+ */
 import { z } from "zod";
 
+/**
+ * Datos de un producto. Tallas, categorías y colores deben tener al menos un
+ * elemento; el precio se convierte a número entero positivo.
+ */
 export const productFormSchema = z.object({
   name: z.string().trim().min(1, "Campo requerido"),
   price: z.coerce
@@ -12,4 +19,5 @@ export const productFormSchema = z.object({
   colors: z.array(z.string()).min(1, "Agrega al menos un color"),
 });
 
+/** Valores del formulario de producto (ya validados). */
 export type ProductFormValues = z.infer<typeof productFormSchema>;

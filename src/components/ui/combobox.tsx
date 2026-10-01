@@ -1,3 +1,6 @@
+/**
+ * Selector múltiple con casillas dentro de un popover.
+ */
 import { useState } from "react";
 import { ChevronsUpDown, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -7,11 +10,15 @@ import { cn, toggleValue } from "../../core/utils";
 type Option = { label: string; value: string };
 
 type ComboboxProps = {
+  /** Id del botón (para asociarlo a un <label htmlFor>). */
   id?: string;
   options: Option[];
+  /** Valores seleccionados. */
   value: string[];
   onChange: (value: string[]) => void;
+  /** Texto cuando no hay nada seleccionado. */
   placeholder?: string;
+  /** Resalta el borde en rojo. */
   invalid?: boolean;
 };
 

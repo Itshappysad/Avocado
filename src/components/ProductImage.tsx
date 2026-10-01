@@ -1,3 +1,6 @@
+/**
+ * Imagen de un producto con estado de carga e imagen de respaldo.
+ */
 import { useStorageImage } from "../hooks/useStorageImage";
 import { imagePaths } from "../core/storage";
 import { Spinner } from "./ui/spinner";
@@ -8,7 +11,9 @@ const PLACEHOLDER = "/imgs/placeholder-product.svg";
 
 type ProductImageProps = {
   productId: string;
+  /** Nombre del producto (texto alternativo de la imagen). */
   name: string;
+  /** Clases extra, por ejemplo para cambiar el tamaño o los bordes. */
   className?: string;
 };
 

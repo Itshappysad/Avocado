@@ -1,6 +1,10 @@
+/**
+ * Sobre nosotros (ruta "/about"): historia, misión, visión, valores y equipo.
+ */
 import { BadgeCheck, UserRound } from "lucide-react";
 import { PageHeader } from "../components/ui/page-header";
 
+/** Tarjetas de texto de la página (título y párrafo). */
 const sections = [
   {
     title: "¿Quiénes somos?",
@@ -20,6 +24,7 @@ const sections = [
   },
 ];
 
+/** Valores de la empresa. */
 const values = [
   "Responsabilidad social",
   "Honestidad",
@@ -27,10 +32,10 @@ const values = [
   "Calidad",
 ];
 
-const team = [
-  "Andrés Martínez Martínez",
-];
+/** Integrantes del equipo. */
+const team = ["Andrés Martínez Martínez"];
 
+/** Tarjeta blanca con título. */
 function InfoCard({
   title,
   children,
@@ -46,6 +51,7 @@ function InfoCard({
   );
 }
 
+/** Página "Sobre nosotros". Los textos están en las constantes de arriba. */
 export default function AboutPage() {
   return (
     <>

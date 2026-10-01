@@ -1,7 +1,11 @@
+/**
+ * Lista desplegable (<select> nativo) con el estilo de la app.
+ */
 import { forwardRef } from "react";
 import { cn } from "../../core/utils";
 
 type NativeSelectProps = React.ComponentPropsWithoutRef<"select"> & {
+  /** Resalta el borde en rojo. */
   invalid?: boolean;
 };
 

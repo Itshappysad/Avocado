@@ -1,3 +1,6 @@
+/**
+ * Una línea de producto (imagen, nombre, talla, color, cantidad y total).
+ */
 import { useQuery } from "@tanstack/react-query";
 import { getProductById } from "../core/database";
 import { formatCurrency } from "../core/utils";
@@ -5,6 +8,7 @@ import type { CartItem } from "../core/types";
 import { ProductImage } from "./ProductImage";
 
 type CartLineProps = {
+  /** Línea del carrito o del pedido a mostrar. */
   item: CartItem;
   /** Controles extra (botones de cantidad, eliminar, etc.). */
   actions?: React.ReactNode;

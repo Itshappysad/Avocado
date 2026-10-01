@@ -1,6 +1,10 @@
+/**
+ * Layout del panel "Mi cuenta" (ruta "/account").
+ */
 import { History, UserRound } from "lucide-react";
 import { DashboardLayout } from "../../components/layout/DashboardLayout";
 
+/** Menú lateral de "Mi cuenta": perfil e historial de compras. */
 export default function AccountLayout() {
   return (
     <DashboardLayout

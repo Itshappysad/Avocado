@@ -1,3 +1,6 @@
+/**
+ * Foto de perfil del usuario (con opción de cambiarla).
+ */
 import { useRef } from "react";
 import { Camera } from "lucide-react";
 import { useStorageImage } from "../hooks/useStorageImage";
@@ -7,12 +10,17 @@ import { Spinner } from "./ui/spinner";
 import { cn } from "../core/utils";
 
 type ProfilePictureProps = {
+  /** Usuario dueño de la foto. */
   userId: string;
   /** Muestra el botón para cambiar la foto. */
   editable?: boolean;
   className?: string;
 };
 
+/**
+ * Foto de perfil circular. Si el usuario no tiene foto muestra el logo de la
+ * tienda. Con `editable` agrega un botón para subir una nueva.
+ */
 export function ProfilePicture({
   userId,
   editable = false,

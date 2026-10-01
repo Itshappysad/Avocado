@@ -1,3 +1,6 @@
+/**
+ * Mis compras (ruta "/account/history"): historial de pedidos del cliente.
+ */
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Package } from "lucide-react";
@@ -9,6 +12,7 @@ import { EmptyState } from "../../components/ui/empty-state";
 import { PageHeader } from "../../components/ui/page-header";
 import { PageLoader } from "../../components/ui/spinner";
 
+/** Lista de compras del cliente con el estado que les puso cada empresa. */
 export default function PurchaseHistoryPage() {
   const { user } = useAuth();
 

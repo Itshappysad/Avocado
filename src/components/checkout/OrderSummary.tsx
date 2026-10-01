@@ -1,13 +1,22 @@
+/**
+ * Resumen del pedido en el checkout (productos, subtotal, envío y total).
+ */
 import { SHIPPING_COST } from "../../core/constants";
 import { formatCurrency } from "../../core/utils";
 import type { CartItem } from "../../core/types";
 import { CartLine } from "../CartLine";
 
 type OrderSummaryProps = {
+  /** Líneas del carrito. */
   items: CartItem[];
+  /** Suma de los productos sin envío. */
   subtotal: number;
 };
 
+/**
+ * Columna derecha del checkout: productos, subtotal, envío (SHIPPING_COST) y
+ * total. En pantallas grandes queda fija al hacer scroll.
+ */
 export function OrderSummary({ items, subtotal }: OrderSummaryProps) {
   return (
     <aside className="h-fit space-y-6 rounded-2xl bg-neutral-100 p-6 lg:sticky lg:top-24">

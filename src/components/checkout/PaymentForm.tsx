@@ -1,3 +1,6 @@
+/**
+ * Formulario de contacto y entrega del checkout.
+ */
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SHIPPING_COST } from "../../core/constants";
@@ -9,10 +12,16 @@ import { Input } from "../ui/input";
 import { NativeSelect } from "../ui/native-select";
 
 type PaymentFormProps = {
+  /** Valores precargados (correo, nombre y dirección del perfil). */
   defaultValues?: Partial<PaymentValues>;
+  /** Recibe los datos validados; el botón se desactiva mientras se ejecuta. */
   onSubmit: (values: PaymentValues) => Promise<void>;
 };
 
+/**
+ * Formulario de contacto y entrega del checkout (validado con `paymentSchema`).
+ * No pide datos de tarjeta: la app registra el pedido sin cobrar.
+ */
 export function PaymentForm({ defaultValues, onSubmit }: PaymentFormProps) {
   const {
     register,

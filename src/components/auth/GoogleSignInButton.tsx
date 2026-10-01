@@ -1,8 +1,16 @@
+/**
+ * Botón "Continuar con Google" (solo se muestra en modo Firebase).
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 import { getAuthErrorMessage, signInWithGoogle } from "../../core/auth";
 import { Button } from "../ui/button";
 
+/**
+ * Inicia sesión con Google en una ventana emergente.
+ *
+ * @param onSuccess Se llama al iniciar sesión (normalmente para redirigir).
+ */
 export function GoogleSignInButton({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
 

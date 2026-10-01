@@ -1,3 +1,12 @@
+/**
+ * Contexto del carrito de compras.
+ *
+ * El carrito se guarda en el backend (por usuario) y se sincroniza en tiempo
+ * real. Cada línea es un producto con una talla y un color concretos; si se
+ * agrega de nuevo la misma combinación, se suma a la línea existente.
+ *
+ * Uso: const { items, add, increase, decrease, remove } = useCart();
+ */
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -16,25 +25,41 @@ type CartContextValue = {
   totalQuantity: number;
   /** Suma de precio × cantidad (sin envío). */
   subtotal: number;
+  /** Si el panel lateral del carrito está abierto. */
   isOpen: boolean;
   setOpen: (open: boolean) => void;
   /** Unidades de un producto en el carrito (sumando todas sus tallas y colores). */
   getProductQuantity: (productId: string) => number;
   /** Agrega una unidad. Si ya existe la misma talla y color, suma a esa línea. */
   add: (item: NewCartItem) => Promise<void>;
+  /** Suma una unidad a una línea del carrito. */
   increase: (cartItemId: string) => Promise<void>;
+  /** Resta una unidad; si queda en 0 la línea se elimina. */
   decrease: (cartItemId: string) => Promise<void>;
+  /** Elimina una línea completa. */
   remove: (cartItemId: string) => Promise<void>;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+/**
+ * Devuelve el carrito y sus acciones.
+ *
+ * @example
+ * const { items, subtotal, add } = useCart();
+ * await add({ productId, price, sizes: ["M"], colors: ["#000000"] });
+ * @throws Error si se usa fuera de <CartProvider>.
+ */
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) throw new Error("useCart debe usarse dentro de <CartProvider>");
   return context;
 }
 
+/**
+ * Proveedor del carrito. Si no hay sesión el carrito está vacío y, al
+ * intentar agregar algo, se envía al usuario a iniciar sesión.
+ */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -53,11 +78,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     };
   }, [userId]);
 
+  /** Dos líneas son la misma si coinciden producto, talla y color. */
   const sameVariant = (a: NewCartItem, b: NewCartItem) =>
     a.productId === b.productId &&
     a.sizes.join() === b.sizes.join() &&
     a.colors.join() === b.colors.join();
 
+  /** Ejecuta una acción del carrito mostrando un aviso si falla. */
   const run = async (action: () => Promise<void>) => {
     try {
       await action();

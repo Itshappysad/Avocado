@@ -1,8 +1,18 @@
 import animate from "tailwindcss-animate";
 
-/** @type {import('tailwindcss').Config} */
+/**
+ * Configuración de Tailwind CSS.
+ *
+ * - darkMode "class": el modo oscuro solo se activa con la clase "dark"
+ *   (así la app no cambia de colores si el sistema operativo está en oscuro).
+ * - Colores "brand-*": verde aguacate de la marca (ej: bg-brand-600).
+ * - Fuentes: Karla para el texto y Sofia (font-sofia) para el logo y títulos.
+ *
+ * @type {import('tailwindcss').Config}
+ */
 export default {
   darkMode: "class",
+  // Archivos donde Tailwind busca clases para incluir en el CSS final.
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     container: {

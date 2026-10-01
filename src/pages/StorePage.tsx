@@ -1,3 +1,6 @@
+/**
+ * Tienda (ruta "/store"): todos los productos con búsqueda y filtro por categoría.
+ */
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, Shirt } from "lucide-react";
@@ -11,6 +14,10 @@ import { Input } from "../components/ui/input";
 import { PageHeader } from "../components/ui/page-header";
 import { PageLoader } from "../components/ui/spinner";
 
+/**
+ * Catálogo completo. La búsqueda y el filtro se aplican en el navegador sobre
+ * la lista ya cargada (useMemo), sin volver a consultar la base de datos.
+ */
 export default function StorePage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | null>(null);

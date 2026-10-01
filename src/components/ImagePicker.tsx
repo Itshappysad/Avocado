@@ -1,11 +1,16 @@
+/**
+ * Selector de imagen con vista previa (usado en el formulario de producto).
+ */
 import { useEffect, useRef, useState } from "react";
 import { ImagePlus } from "lucide-react";
 import { cn } from "../core/utils";
 
 type ImagePickerProps = {
+  /** Se llama con el archivo elegido por el usuario. */
   onChange: (file: File) => void;
   /** URL de la imagen actual (al editar). */
   defaultImage?: string | null;
+  /** Resalta el borde en rojo (cuando falta la imagen). */
   invalid?: boolean;
 };
 

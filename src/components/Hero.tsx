@@ -1,6 +1,10 @@
+/**
+ * Portada de la página de inicio.
+ */
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
+/** Portada verde con el logo, un eslogan y el botón para ir a la tienda. */
 export function Hero() {
   return (
     <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-800 via-brand-700 to-neutral-900 px-8 py-16 text-white sm:px-14 sm:py-24">

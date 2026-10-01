@@ -1,3 +1,6 @@
+/**
+ * Inicio de sesión y registro (ruta "/signup").
+ */
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -14,8 +17,17 @@ import {
 import { cn } from "../core/utils";
 import { toast } from "sonner";
 
+/** Pestaña activa: iniciar sesión o crear cuenta. */
 type Mode = "signin" | "signup";
 
+/**
+ * Pantalla de inicio de sesión y registro con dos pestañas.
+ *
+ * Si alguien llega aquí porque intentó abrir una ruta privada, RequireAuth
+ * guarda esa ruta en `location.state.from` y, al ingresar, se le devuelve ahí.
+ * En modo local muestra las cuentas de prueba; en modo Firebase, el botón de
+ * Google.
+ */
 export default function AuthPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const { user } = useAuth();

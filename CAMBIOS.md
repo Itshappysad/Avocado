@@ -1,5 +1,18 @@
 # Revisión y cambios (septiembre 2026)
 
+## Tercera ronda: documentación
+
+- Todo el código quedó documentado en español: cada archivo empieza con un
+  comentario que explica su propósito, y cada componente, hook, función, tipo
+  y prop exportado tiene JSDoc (el editor lo muestra al pasar el mouse).
+- README reescrito: capturas de pantalla, diagramas de arquitectura y del
+  flujo de compra, configuración, modelo de datos, guías rápidas, convenciones
+  y solución de problemas.
+- Las fuentes Karla y Sofia ahora vienen incluidas en el proyecto
+  (`@fontsource`), así la app se ve igual sin internet.
+- La página «Sobre nosotros» y el README muestran solo a Andrés Martínez
+  Martínez en el equipo.
+
 ## Segunda ronda: modo local y seguridad
 
 - **Modo local por defecto:** la base de datos de Firebase ya no existe, así que

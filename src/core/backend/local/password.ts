@@ -4,6 +4,7 @@
  * Es solo para el modo local de demostración: no es criptográficamente
  * seguro. En producción las contraseñas las maneja Firebase Auth.
  */
+/** Función hash rápida de 53 bits (cyrb53, dominio público). */
 function cyrb53(text: string, seed = 0) {
   let h1 = 0xdeadbeef ^ seed;
   let h2 = 0x41c6ce57 ^ seed;
@@ -21,6 +22,13 @@ function cyrb53(text: string, seed = 0) {
   return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
 }
 
+/**
+ * Calcula el hash de una contraseña.
+ *
+ * @param salt Texto aleatorio que se mezcla con la contraseña para que dos
+ *   contraseñas iguales no den el mismo hash. Si no se pasa, se genera uno.
+ * @returns Texto "salt:hash" para guardar.
+ */
 export function hashPassword(
   password: string,
   salt = Math.random().toString(36).slice(2, 10),
@@ -31,6 +39,7 @@ export function hashPassword(
   return `${salt}:${hash}`;
 }
 
+/** Indica si `password` corresponde al hash guardado ("salt:hash"). */
 export function verifyPassword(password: string, stored: string) {
   const [salt] = stored.split(":");
   return hashPassword(password, salt) === stored;

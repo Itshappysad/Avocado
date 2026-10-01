@@ -1,12 +1,18 @@
+/**
+ * Globo flotante anclado a un elemento (shadcn/ui, basado en Radix Popover).
+ */
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 import { cn } from "../../core/utils";
 
+/** Contenedor del popover. */
 const Popover = PopoverPrimitive.Root;
 
+/** Elemento que abre el popover. */
 const PopoverTrigger = PopoverPrimitive.Trigger;
 
+/** Contenido flotante; se posiciona solo para no salirse de la pantalla. */
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>

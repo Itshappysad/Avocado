@@ -10,6 +10,7 @@ import type { LocalDb, StoredOrder, StoredPurchase } from "./store";
 const SHIRT_SIZES = ["XS", "S", "M", "L", "XL"];
 const PANTS_SIZES = ["S", "M", "L", "XL", "XXL"];
 
+/** Catálogo de ejemplo (6 de «Avocado e Vestiti» y 4 de «Lana & Lino Taller»). */
 const products: Product[] = [
   {
     id: "p-camisa-oxford",
@@ -118,9 +119,11 @@ export const SEED_IMAGES: Record<string, string> = Object.fromEntries(
   products.map((p) => [imagePaths.product(p.id), `/imgs/products/${p.id}.svg`]),
 );
 
+/** Fecha ISO de hace `days` días (así los pedidos de ejemplo siempre son recientes). */
 const daysAgo = (days: number) =>
   new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
+/** Crea una línea de pedido para un producto del catálogo de ejemplo. */
 function line(
   id: string,
   productId: string,
@@ -163,6 +166,13 @@ function order(
   };
 }
 
+/**
+ * Crea los datos de ejemplo iniciales:
+ * - 3 usuarios (ver demo-accounts.ts): Cuenta Demo, Lucía y Mateo.
+ * - 2 empresas: «Avocado e Vestiti» (de Cuenta Demo) y «Lana & Lino Taller» (de Mateo).
+ * - 10 productos con imagen en public/imgs/products/.
+ * - 4 pedidos con distintos estados, para que los historiales no estén vacíos.
+ */
 export function createSeed(): LocalDb {
   const luciaAddress = "Carrera 45 # 12-30 · Medellín, Antioquia · 050021";
   const demoAddress = "Calle 10 # 5-20 · Cali, Valle del Cauca · 760001";

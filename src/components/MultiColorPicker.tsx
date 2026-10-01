@@ -1,8 +1,12 @@
+/**
+ * Selector de varios colores (usado en el formulario de producto).
+ */
 import { useEffect, useRef } from "react";
 import { Plus, X } from "lucide-react";
 import { cn, isLightColor } from "../core/utils";
 
 type MultiColorPickerProps = {
+  /** Colores seleccionados en formato hex ("#rrggbb"). */
   value: string[];
   onChange: (colors: string[]) => void;
 };

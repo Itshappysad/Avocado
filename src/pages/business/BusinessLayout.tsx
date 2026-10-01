@@ -1,3 +1,6 @@
+/**
+ * Layout del panel "Mi empresa" (ruta "/company").
+ */
 import { Navigate } from "react-router-dom";
 import { ClipboardList, PackagePlus, Settings, Shirt } from "lucide-react";
 import { useMyCompany } from "../../hooks/useMyCompany";
